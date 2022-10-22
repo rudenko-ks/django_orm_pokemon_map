@@ -85,6 +85,7 @@ target/
 __pycache__/
 local_settings.py
 
+.vscode
 .venv
 .env
 db.sqlite3
