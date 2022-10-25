@@ -74,6 +74,7 @@ def show_pokemon(request, pokemon_id):
     requested_pokemon = {
         'pokemon_id': pokemon.id,
         'title_ru': pokemon.title,
+        'description': pokemon.description,
     }
     if pokemon.photo:
         requested_pokemon['img_url'] = request.build_absolute_uri(
