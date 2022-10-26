@@ -9,6 +9,11 @@ class Pokemon(models.Model):
     title_jp = models.CharField(max_length=200, blank=True)
     photo = models.ImageField(null=True, blank=True)
     description = models.TextField(blank=True)
+    previous_evolution = models.ForeignKey('self',
+                                           null=True,
+                                           blank=True,
+                                           on_delete=models.SET_NULL,
+                                           related_name='next_evolutions')
 
     def __str__(self) -> str:
         return f'{self.title}'
@@ -17,7 +22,9 @@ class Pokemon(models.Model):
 class PokemonEntity(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
-    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(Pokemon,
+                                on_delete=models.CASCADE,
+                                related_name='entities')
     appeared_at = models.DateTimeField(default=now)
     disappeared_at = models.DateTimeField(default=now)
     level = models.IntegerField(default=0)
