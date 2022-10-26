@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.utils.timezone import now
 
@@ -5,14 +6,18 @@ from django.utils.timezone import now
 class Pokemon(models.Model):
 
     title = models.CharField(max_length=200, verbose_name='Название')
-    title_en = models.CharField(max_length=200,
+    title_en = models.CharField(default='',
+                                max_length=200,
                                 blank=True,
                                 verbose_name='Название, англ.')
-    title_jp = models.CharField(max_length=200,
+    title_jp = models.CharField(default='',
+                                max_length=200,
                                 blank=True,
                                 verbose_name='Название, яп.')
     photo = models.ImageField(null=True, blank=True, verbose_name='Изображение')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    description = models.TextField(default='',
+                                   blank=True,
+                                   verbose_name='Описание')
     previous_evolution = models.ForeignKey(
         'self',
         null=True,
@@ -32,12 +37,14 @@ class PokemonEntity(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name='entities',
                                 verbose_name='Покемон')
-    appeared_at = models.DateTimeField(default=now,
+    appeared_at = models.DateTimeField(null=True,
+                                       blank=True,
                                        verbose_name='Время появления')
-    disappeared_at = models.DateTimeField(default=now,
+    disappeared_at = models.DateTimeField(null=True,
+                                          blank=True,
                                           verbose_name='Время исчезновения')
-    level = models.IntegerField(default=0, verbose_name='Уровень')
-    health = models.IntegerField(default=0, verbose_name='Здоровье')
-    strength = models.IntegerField(default=0, verbose_name='Сила')
-    defense = models.IntegerField(default=0, verbose_name='Защита')
-    stamina = models.IntegerField(default=0, verbose_name='Выносливость')
+    level = models.IntegerField(blank=True, verbose_name='Уровень')
+    health = models.IntegerField(blank=True, verbose_name='Здоровье')
+    strength = models.IntegerField(blank=True, verbose_name='Сила')
+    defense = models.IntegerField(blank=True, verbose_name='Защита')
+    stamina = models.IntegerField(blank=True, verbose_name='Выносливость')
