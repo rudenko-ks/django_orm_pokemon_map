@@ -1,7 +1,5 @@
 import folium
-import json
 
-from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from django.utils.timezone import localtime
 

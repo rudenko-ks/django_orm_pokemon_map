@@ -1,6 +1,4 @@
-from email.policy import default
 from django.db import models
-from django.utils.timezone import now
 
 
 class Pokemon(models.Model):
