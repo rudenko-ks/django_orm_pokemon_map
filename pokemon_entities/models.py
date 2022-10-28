@@ -6,18 +6,14 @@ from django.utils.timezone import now
 class Pokemon(models.Model):
 
     title = models.CharField(max_length=200, verbose_name='Название')
-    title_en = models.CharField(default='',
-                                max_length=200,
+    title_en = models.CharField(max_length=200,
                                 blank=True,
                                 verbose_name='Название, англ.')
-    title_jp = models.CharField(default='',
-                                max_length=200,
+    title_jp = models.CharField(max_length=200,
                                 blank=True,
                                 verbose_name='Название, яп.')
     photo = models.ImageField(null=True, blank=True, verbose_name='Изображение')
-    description = models.TextField(default='',
-                                   blank=True,
-                                   verbose_name='Описание')
+    description = models.TextField(blank=True, verbose_name='Описание')
     previous_evolution = models.ForeignKey(
         'self',
         null=True,
